@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import { nanoid } from 'nanoid';
 import css from './Phonebook.module.css';
-
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/slice';
 import { selectContacts } from 'redux/selector';
+import { addContact } from 'redux/operations';
 
 const Phonebook = () => {
   const [name, setName] = useState('');
@@ -13,8 +11,6 @@ const Phonebook = () => {
   const contacts = useSelector(selectContacts);
 
   const dispatch = useDispatch();
-
-
 
   const handleChange = ev => {
     const { name, value } = ev.target;
@@ -33,8 +29,7 @@ const Phonebook = () => {
 
   const handleSubmit = ev => {
     ev.preventDefault();
-    const id = nanoid();
-    const сontact = { id, name, number };
+    const сontact = { name, number };
     const isExist = name =>
       contacts.some(
         contact => contact.name.toLowerCase() === name.toLowerCase()

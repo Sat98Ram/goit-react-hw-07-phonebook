@@ -1,11 +1,18 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectContacts, selectFilter, selectIsLoading } from 'redux/selector';
+import { fetchContacts } from 'redux/operations';
+import { useEffect } from 'react';
 import ContactItem from './ContactItem';
-
-import { selectContacts, selectFilter } from 'redux/selector';
 
 const Contacts = () => {
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectFilter);
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   const filterContacts = () => {
     return contacts.filter(contact =>
@@ -16,6 +23,7 @@ const Contacts = () => {
 
   return (
     <div>
+      {isLoading && <p>Loading...</p>}
       <ul>
         {filteredContacts.map((contact, index) => (
           <ContactItem

@@ -10,6 +10,7 @@ const contactsSlice = createSlice({
   initialState,
   reducers: {
     addContact(state, action) {
+      console.log('action in redux', action);
       state.contacts.push(action.payload);
     },
     updateFilter(state, action) {

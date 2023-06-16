@@ -14,6 +14,8 @@ const Phonebook = () => {
 
   const dispatch = useDispatch();
 
+
+
   const handleChange = ev => {
     const { name, value } = ev.target;
 
@@ -41,7 +43,10 @@ const Phonebook = () => {
       alert(`contact already exist`);
       return;
     }
-    dispatch(addContact(сontact));
+
+    const action = addContact(сontact);
+    console.log('action in form', action);
+    dispatch(action);
 
     setName('');
     setNumber('');
